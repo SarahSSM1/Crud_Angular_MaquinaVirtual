@@ -6,35 +6,35 @@ Este projeto representa a interface de usuário (frontend) para um sistema de ge
 
 ## 📋 Visão Geral
 
-O frontend providencia uma experiência de usuário intuitiva para o gerenciamento de máquinas virtuais. Ele consome as APIs fornecidas pelo backend para exibir, criar, editar e excluir informações de Maquinas Virtuais, além de monitorar o status de tarefas relacionadas.
+O frontend providencia uma experiência de usuário intuitiva para o gerenciamento de máquinas virtuais. Ele consome as APIs fornecidas pelo backend para exibir, criar, editar e excluir informações de VMs, além de monitorar o status de tarefas relacionadas.
 
 ---
 
 ## 🚀 Funcionalidades
 
-- **Criação de Máquinas Virtuais**  
+- _Criação de Máquinas Virtuais_  
   Formulários para provisionar novas VMs com configurações personalizadas.
 
-- **Listagem de Máquinas Virtuais**  
+- _Listagem de Máquinas Virtuais_  
   Visualização tabular e detalhada de todas as VMs existentes.
 
-- **Edição de Máquinas Virtuais**  
+- _Edição de Máquinas Virtuais_  
   Modificação dos detalhes e configurações de VMs.
 
-- **Exclusão de Máquinas Virtuais**  
+- _Exclusão de Máquinas Virtuais_  
   Funcionalidade para remover VMs do sistema.
 
-- **Monitoramento de Tarefas**  
+- _Monitoramento de Tarefas_  
   Exibição do progresso e status de operações assíncronas iniciadas pelo usuário.
 
 ---
 
-## 🛠️ Tecnologias Utilizadas
+## 🛠 Tecnologias Utilizadas
 
-- **Angular** – Framework para criação de SPAs modernas.
-- **TypeScript** – Superset de JavaScript com tipagem estática.
-- **Node.js** – Ambiente de execução JavaScript.
-- **npm/Yarn** – Gerenciadores de pacotes.
+- _Angular_ – Framework para criação de SPAs modernas.
+- _TypeScript_ – Superset de JavaScript com tipagem estática.
+- _Node.js_ – Ambiente de execução JavaScript.
+- _npm/Yarn_ – Gerenciadores de pacotes.
 
 ---
 
@@ -42,33 +42,32 @@ O frontend providencia uma experiência de usuário intuitiva para o gerenciamen
 
 Antes de iniciar o projeto, certifique-se de ter instalado em sua máquina:
 
-- **Node.js 18.x ou superior**  
+- _Node.js 18.x ou superior_  
   👉 [Download Node.js](https://nodejs.org/)
 
-- **Angular CLI 19.x ou superior**  
-  Instalação global via npm:
+- _Angular CLI 17.x ou superior_  
+   Instalação global via npm:
+
   ```bash
-  npm install -g @angular/cli
+  npm install -g @angular/cli
+  ```
 
+  Caso aconteça o erro:
+  Erro: Módulo 'tslib' não pode ser encontrado
 
-## ⚙️ Configuração e Execução
+Esse erro ocorre quando o TypeScript precisa usar helpers auxiliares (funções internas para recursos como extends, async/await, etc), mas não encontra o pacote tslib instalado no projeto.
 
-Clone o repositório e navegue até o diretório frontend:
+Isso acontece porque, para otimizar o código gerado, o TypeScript importa esses helpers do tslib. Se o pacote não estiver instalado, a compilação falha com essa mensagem.
 
-bash
-Copiar
-Editar
-cd frontend
-Instale as dependências:
-
-bash
-Copiar
-Editar
-npm install
-Execute a aplicação Angular:
+Como resolver:
+Basta instalar o pacote tslib usando o gerenciador de pacotes:
 
 bash
 Copiar
 Editar
-ng serve
-A aplicação será servida em http://localhost:4200.
+npm install tslib --save
+
+# ou, se usar yarn
+
+yarn add tslib
+Após isso, o erro deve desaparecer.
