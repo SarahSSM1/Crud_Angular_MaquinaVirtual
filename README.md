@@ -53,12 +53,12 @@ Antes de iniciar o projeto, certifique-se de ter instalado em sua máquina:
   ```
 
 # Instale as dependências
-
 npm install
 
 # Execute a aplicação Angular
+ng serve
 
-ng serve
+
 
 # Caso aconteça o erro:
 
@@ -69,11 +69,15 @@ Esse erro ocorre quando o TypeScript precisa usar helpers auxiliares (funções 
 Isso acontece porque, para otimizar o código gerado, o TypeScript importa esses helpers do tslib. Se o pacote não estiver instalado, a compilação falha com essa mensagem.
 
 # Como resolver:
-
 Basta instalar o pacote tslib usando o gerenciador de pacotes:
 
-npm install tslib --save
 
-# ou, se usar yarn
+
+
+
+
+
+
+
 
 yarn add tslib
