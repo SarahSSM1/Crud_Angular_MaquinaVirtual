@@ -1,0 +1,17 @@
+.custom-nav-link {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  color: #f8f9fa;
+  transition: color 0.3s ease;
+  text-decoration: none;
+}
+
+.custom-nav-link:hover {
+  color: #ffc107;
+}
+
+
+.active-link {
+  color: #904bcf !important;
+  font-weight: 600;
+}

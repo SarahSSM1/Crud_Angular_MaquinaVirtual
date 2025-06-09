@@ -1,0 +1,31 @@
+<h2 class="text-center mb-4 text-primary">
+  {{ isEditMode ? 'Editar Máquina Virtual' : 'Cadastrar Nova Máquina Virtual' }}
+</h2>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="card p-4 shadow-sm mx-auto barra">
+  <ng-container *ngFor="let field of fields">
+    <div class="mb-3">
+      <label [for]="field.name" class="form-label">
+        {{ field.label }}{{ field.suffix }}
+      </label>
+      <input
+        [id]="field.name"
+        [type]="field.type"
+        [formControlName]="field.name"
+        class="form-control"
+        [ngClass]="{ 'is-invalid': isInvalid(field.name) }"
+        [placeholder]="field.placeholder"
+      />
+      <div *ngIf="isInvalid(field.name)" class="invalid-feedback">
+        {{ getErrorMessage(field.name) }}
+      </div>
+    </div>
+  </ng-container>
+
+  <div class="d-flex justify-content-end mt-4">
+    <button type="submit" class="btn btn-success me-2" [disabled]="form.invalid">
+      {{ isEditMode ? 'Atualizar' : 'Cadastrar' }}
+    </button>
+    <button type="button" class="btn btn-secondary" (click)="cancel()">Cancelar</button>
+  </div>
+</form>

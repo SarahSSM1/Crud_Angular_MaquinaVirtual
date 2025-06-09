@@ -1,0 +1,122 @@
+<h2 class="text-center mb-4 text-primary">Lista de Máquinas Virtuais</h2>
+
+<ng-container *ngIf="confirmDeleteId || (confirmStatusId && confirmStatusNew)">
+  <div class="alert alert-warning mx-auto modals" role="alert">
+    <div
+      class="d-flex justify-content-between align-items-center flex-wrap gap-2"
+    >
+      <span *ngIf="confirmDeleteId">
+        Tem certeza que deseja excluir <strong>{{ confirmDeleteName }}</strong
+        >?
+      </span>
+      <span *ngIf="!confirmDeleteId">
+        Deseja alterar o status para
+        <strong>{{ getStatusDisplayName(confirmStatusNew) }}</strong
+        >?
+      </span>
+      <div class="d-flex gap-2">
+        <button
+          class="btn btn-sm btn-secondary"
+          (click)="confirmDeleteId ? cancelDelete() : cancelChangeStatus()"
+        >
+          Cancelar
+        </button>
+        <button
+          class="btn btn-sm btn-danger"
+          (click)="confirmDeleteId ? confirmDelete() : confirmChangeStatus()"
+        >
+          {{ confirmDeleteId ? "Excluir" : "Confirmar" }}
+        </button>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+<div *ngIf="isLoading" class="d-flex justify-content-center my-4">
+  <div class="spinner-border text-primary" role="status">
+    <span class="visually-hidden">Carregando...</span>
+  </div>
+</div>
+
+<div
+  *ngIf="!isLoading && virtualMachines.length === 0"
+  class="alert alert-info text-center"
+  role="alert"
+>
+  Nenhuma máquina virtual cadastrada.
+  <a (click)="goToNewMachine()" class="alert-link cursor-pointer"
+    >Crie uma nova máquina!</a
+  >
+</div>
+
+<div
+  *ngIf="virtualMachines.length > 0"
+  class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4"
+>
+  <div *ngFor="let machine of virtualMachines" class="col">
+    <div class="card h-100 shadow-sm border-0">
+      <div class="card-header bg-light">
+        <h5 class="mb-0 text-dark text-truncate" title="{{ machine.nome }}">
+          {{ machine.nome }}
+        </h5>
+      </div>
+      <div class="card-body small">
+        <p><strong>ID:</strong> {{ machine.id }}</p>
+        <p><strong>CPU:</strong> {{ machine.cpu }} núcleos</p>
+        <p><strong>Memória:</strong> {{ machine.memoria }} GB</p>
+        <p><strong>Disco:</strong> {{ machine.disco }} GB</p>
+        <p>
+          <strong>Data de Criação:</strong>
+          {{ machine.dataDeCriacao | date : "dd/MM/yyyy HH:mm" }}
+        </p>
+        <p>
+          <strong>Status:</strong>
+          <span class="badge" [ngClass]="getStatusClass(machine.status)">
+            {{ machine.status }}
+          </span>
+        </p>
+      </div>
+      <div
+        class="card-footer bg-warning-subtle d-flex flex-wrap justify-content-between gap-2"
+      >
+        <button
+          class="btn btn-sm btn-outline-primary"
+          (click)="editVirtualMachine(machine.id)"
+        >
+          Editar
+        </button>
+
+        <button
+          class="btn btn-sm btn-outline-danger"
+          (click)="askDeleteConfirmation(machine.id, machine.nome)"
+        >
+          Excluir
+        </button>
+
+        <button
+          *ngIf="machine.status !== 'START'"
+          class="btn btn-sm btn-success"
+          (click)="askChangeStatusConfirmation(machine.id, 'START')"
+        >
+          Iniciar
+        </button>
+
+        <button
+          *ngIf="machine.status !== 'STOP'"
+          class="btn btn-sm btn-danger"
+          (click)="askChangeStatusConfirmation(machine.id, 'STOP')"
+        >
+          Parar
+        </button>
+
+        <button
+          *ngIf="machine.status !== 'SUSPEND'"
+          class="btn btn-sm btn-warning"
+          (click)="askChangeStatusConfirmation(machine.id, 'SUSPEND')"
+        >
+          Suspender
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
