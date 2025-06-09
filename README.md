@@ -52,22 +52,28 @@ Antes de iniciar o projeto, certifique-se de ter instalado em sua máquina:
   npm install -g @angular/cli
   ```
 
-  Caso aconteça o erro:
-  Erro: Módulo 'tslib' não pode ser encontrado
+# Instale as dependências
+
+npm install
+
+# Execute a aplicação Angular
+
+ng serve
+
+# Caso aconteça o erro:
+
+# Erro: Módulo 'tslib' não pode ser encontrado
 
 Esse erro ocorre quando o TypeScript precisa usar helpers auxiliares (funções internas para recursos como extends, async/await, etc), mas não encontra o pacote tslib instalado no projeto.
 
 Isso acontece porque, para otimizar o código gerado, o TypeScript importa esses helpers do tslib. Se o pacote não estiver instalado, a compilação falha com essa mensagem.
 
-Como resolver:
+# Como resolver:
+
 Basta instalar o pacote tslib usando o gerenciador de pacotes:
 
-bash
-Copiar
-Editar
 npm install tslib --save
 
 # ou, se usar yarn
 
 yarn add tslib
-Após isso, o erro deve desaparecer.
